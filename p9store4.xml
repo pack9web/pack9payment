@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+<ModulePrefs
+title="Pack9 Store Gadget"
+description="Pack9 Store Gadget"
+author="Mike Fisher"
+author_affiliation="Pack 9"
+author_email="webmaster@pack9.com"
+screenshot=""
+thumbnail=""
+width="100%"
+height="600"
+> 
+<Require feature="idi"/>
+<Require feature="locked-domain" />
+<Require feature="dynamic-height"/>
+</ModulePrefs>
+<UserPref name="_table_query_url" display_name="Data source url" required="true"/>
+<UserPref name="_table_query_refresh_interval" display_name="Data refresh interval (minutes)" default_value="0" datatype="enum" required="false">
+<EnumValue value="0" display_value="Do not refresh"/>
+<EnumValue value="60" display_value="1"/>
+<EnumValue value="300" display_value="5"/>
+<EnumValue value="1800" display_value="30"/>
+</UserPref>
+<UserPref name="_paypal_acct" display_name="PayPal Account" required="true"/>
+<UserPref name="_return_url" display_name="Post purchase URL" required="true"/>
+<Content type="html"><![CDATA[
+
+<script src="https://www.google.com/jsapi" type="text/javascript"></script>
+
+<form name="Scout" style="margin: 0px">
+Scout's full name: <input name="name" width=100>  Den number: <input name="den" size="2" maxlength="2">
+</form>
+
+<p>&nbsp<p>
+
+<style>
+div.cell11 {float: left; width: 40%; }
+div.cell13 {float: left; width: 25%; }
+div.cell14 {float: left; width: 10%; }
+div.cell15 {float: left; width: 10%; text-align: right; padding: 0 5 0 0; }
+div.cell16 {float: left; width: 10%; }
+div.cell21 {float: left; width: 10%; }
+div.cell22 {float: left; width: 65%; }
+div.cell26 {float: left; width: 24%; }
+div.table-row { }
+div.tr-end {clear: both; margin: 0; padding: 0; width: auto; }
+hr.sep {align: center; width: 90%; } 
+</style>
+
+<div id="tablediv" style="overflow: auto;"><img src="https://www.google.com/ig/images/spinner.gif" /></div>
+
+
+
+
+<script>
+
+const Business = 'treasurer@pack9.com';
+const ReturnURL = '';
+
+function VerifyName(form) {
+    var valid = true
+
+    if (document.Scout.name.value == "" || document.Scout.den.value == "") {
+       valid = false;
+       alert("You must enter your Scout's full name and den number for payments to be processed correctly.");
+    } else {
+        form.os0.value = document.Scout.name.value + ", Den " + document.Scout.den.value;
+    }
+    return valid;
+}
+
+var gadgetHelper = null;
+/*_IG_RegisterOnloadHandler(loadVisualizationAPI); */
+
+function loadVisualizationAPI() { 
+  google.load("visualization", "1");
+  google.setOnLoadCallback(sendQuery);
+}
+
+function sendQuery() {
+  var prefs = new _IG_Prefs(); // User preferences 
+  gadgetHelper = new google.visualization.GadgetHelper(); 
+  var query = gadgetHelper.createQueryFromPrefs(prefs);
+  query.send(handleQueryResponse);
+}
+
+function handleQueryResponse(response) {
+
+  /**
+   * Use the visualization GadgetHelper class to handle errors 
+   */
+  if (!gadgetHelper.validateResponse(response)) {
+    return;     // Default error handling was done, just leave. 
+  }
+
+  /**
+   * GET THE DATA FROM THE SPREADSHEET - sorry to scream in caps, but this is a key step
+   */
+  var data = response.getDataTable();
+
+  var html = [];   // start the HTML output string
+
+  const Sku     = 0;
+  const Title   = 1;
+  const Price   = 2;
+  const Descr   = 3;
+  const Multi   = 4;
+  const OptName = 5;
+  const Options = 6; 
+
+  /**
+   * Process all Rows in the specified range
+   */
+  for (var row = 0; row < data.getNumberOfRows(); row++) {
+      var sku = escapeHtml(data.getFormattedValue(row, Sku));
+      var title = escapeHtml(data.getFormattedValue(row, Title));
+      var price = escapeHtml(data.getFormattedValue(row, Price));
+      var descr = escapeHtml(data.getFormattedValue(row, Descr));
+      var multi = escapeHtml(data.getFormattedValue(row, Multi));
+      var optName = escapeHtml(data.getFormattedValue(row, OptName));
+      var options = escapeHtml(data.getFormattedValue(row, Options));
+
+      html.push('<form name="form' + row + '" target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" onsubmit="return VerifyName(this)" style="margin: 0px">\n');
+      html.push('<input type="hidden" name="cmd" value="_cart">\n');
+      html.push('<input type="hidden" name="business" value="' + Business + '">\n');
+      html.push('<input type="hidden" name="item_name" value="' + title + '">\n');
+      html.push('<input type="hidden" name="custom" value="">\n');
+      html.push('<input type="hidden" name="return" value="' + ReturnURL + '">\n');
+      html.push('<input type="hidden" name="no_note" value="1">\n');
+      html.push('<input type="hidden" name="currency_code" value="USD">\n');
+      html.push('<input type="hidden" name="quantity" value="1">\n');
+      html.push('<input type="hidden" name="add" value="1">\n');
+      html.push('<input type="hidden" name="amount" value="' + price + '">\n');
+      html.push('<input type="hidden" name="on0" value="For">\n');
+      html.push('<input type="hidden" name="os0">\n');
+
+      if (optName != '') {
+          html.push('<input type="hidden" name="on1" value="' + optName +'">\n');
+      }
+
+      html.push('<div class="table-row">\n');
+      html.push('<div class="cell11">' + title + '</div>\n');
+
+      html.push('<div class="cell13">');
+      if (optName != '') {
+          html.push(optName + ': <select name="os1">');
+          var opts = options.split(',');
+          for (var opt in opts) {
+              html.push('<option value="' + opts[opt] + '">' + opts[opt] + '</option>');
+          }
+          html.push('</select>');
+      } else {
+          html.push('&nbsp;');
+      }
+      html.push('</div>\n');
+
+      html.push('<div class="cell14">');
+      if (multi != '') {
+          html.push('Qty: <input name="quantity" value="1" size="2" maxlength="2">\n');
+      } else {
+          html.push('&nbsp;');
+      }
+      html.push('</div>\n');
+
+      html.push('<div class="cell15">$' + price + '</div>\n');
+      html.push('<div class="cell16"><input src="https://www.paypal.com/en_US/i/btn/btn_cart_SM.gif" alt="Add to cart" name="submit" border="0" type="image"></div>\n');
+      html.push('<div class="tr-end"></div>\n');
+      html.push('</div>');
+      html.push('<div class="table-row">\n');
+      html.push('<div class="cell21">&nbsp;</div>\n');
+      html.push('<div class="cell22">' + descr + '</div>\n');
+      html.push('<div class="cell26">&nbsp;</div>\n');
+      html.push('<div class="tr-end">&nbsp;<hr class="sep">&nbsp;</div>\n');
+      html.push('</div>');
+
+      html.push('</form>\n\n');
+    
+  } 
+
+
+  /**
+   * Set the generated html into the container div.
+   */
+  var tableDiv = _gel('tablediv');
+  tableDiv.innerHTML = html.join('');
+  /*tableDiv.style.width = document.body.clientWidth + 'px'; */
+  /*tableDiv.style.height = document.body.clientHeight + 'px';*/
+
+  gadgets.window.adjustHeight();
+}
+
+function escapeHtml(text) {
+  if (text == null) {
+    return '';
+  }
+  return _hesc(text);
+} 
+</script>
+
+
+<SCRIPT type="text/javascript">
+	gadgets.util.registerOnLoadHandler(loadVisualizationAPI);
+</SCRIPT>\
+
+]]>
+</Content>
+</Module>
