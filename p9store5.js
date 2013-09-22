@@ -79,8 +79,8 @@ function fillDens(response) {
     html.push('<option value="'+num'+">'+num+' - '+rank+'<\option>\n');
   }
 
-  var denDiv = document.getElementById('dendiv');
-  denDiv.innerHTML = html.join('');
+  var denSelect = document.getElementById('denselect');
+  denSelect.innerHTML = html.join('');
 
 }
 
