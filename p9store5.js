@@ -18,11 +18,11 @@ function VerifyName(form) {
 
 
 var debugDiv = document.getElementById('debugdiv');
-var debug = [];
+var debugtxt = [];
 
 function debug(text) {
-  debug.push(text);
-  debugDiv.innerHTML = debug.join('');
+  debugtxt.push(text);
+  debugDiv.innerHTML = debugtxt.join('');
 }
 
 function loadVisualizationAPI() { 
