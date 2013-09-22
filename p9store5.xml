@@ -29,7 +29,7 @@ height="600"
 <script src="https://www.google.com/jsapi" type="text/javascript"></script>
 <script src="https://pack9payment.googlecode.com/git/p9store5.js" type="text/javascript"></script>
 
-<p>&nbsp<p>
+<p>version 5.2<p>
 
 <form name="Scout" style="margin: 0px">
 Scout's full name: <input name="name" width=100>  Den number: <input name="den" size="2" maxlength="2">
