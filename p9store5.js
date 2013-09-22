@@ -61,6 +61,7 @@ function fillDens(response) {
   const Number = 0;
   const Rank   = 1;
  
+  html.push('<option value="">choose...</option>\n');
   for (var row = 0; row < data.getNumberOfRows(); row++) {
     var num = escapeHtml(data.getFormattedValue(row, Number));
     var rank = escapeHtml(data.getFormattedValue(row, Rank));
