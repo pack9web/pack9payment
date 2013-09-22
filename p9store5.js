@@ -25,8 +25,10 @@ debugDiv.innerHTML = "Point #1";
 
 
 function loadVisualizationAPI() { 
+  debugDiv.innerHTML = "Point #4";
   google.load("visualization", "1");
   google.setOnLoadCallback(sendQuery);
+  debugDiv.innerHTML = "Point #5";
 }
 
 function sendQuery() {
@@ -36,12 +38,15 @@ function sendQuery() {
   //var query = gadgetHelper.createQueryFromPrefs(prefs);
   //query.send(handleQueryResponse);
 
+  debugDiv.innerHTML = "Point #6";
+
   var prefs = new gadgets.Prefs();
 
   var query = google.visualization.Query(prefs.getString("_inventory_url"));
   query.setRefreshInterval(prefs.getInt("_inventory_refresh_interval"));
   query.send(fillInventory);
-
+  
+  debugDiv.innerHTML = "Point #7";
 }
 
 function fillInventory(response) {
@@ -172,3 +177,6 @@ function escapeHtml(str) {
   //str = str.replace(/"/g, "\"").replace(/'/g, "'");
   return str;
 } 
+
+debugDiv.innerHTML = "Point #2";
+
