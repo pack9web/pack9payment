@@ -19,6 +19,11 @@ function VerifyName(form) {
 // _IG_RegisterOnloadHandler(loadVisualizationAPI); 
 //gadgets.util.registerOnLoadHandler(loadVisualizationAPI);
 
+
+var debugDiv = document.getElementById('debugdiv');
+debugDiv.innerHTML = "Point #1";
+
+
 function loadVisualizationAPI() { 
   google.load("visualization", "1");
   google.setOnLoadCallback(sendQuery);
