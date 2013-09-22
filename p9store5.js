@@ -15,9 +15,9 @@ function VerifyName(form) {
     return valid;
 }
 
-var gadgetHelper = null;
+//var gadgetHelper = null;
 // _IG_RegisterOnloadHandler(loadVisualizationAPI); 
-gadgets.util.registerOnLoadHandler(loadVisualizationAPI);
+//gadgets.util.registerOnLoadHandler(loadVisualizationAPI);
 
 function loadVisualizationAPI() { 
   google.load("visualization", "1");
