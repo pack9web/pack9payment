@@ -15,6 +15,7 @@ height="600"
 <Require feature="locked-domain" />
 <Require feature="dynamic-height"/>
 </ModulePrefs>
+<UserPref name="_den_url" display_name="Den list spreadsheet URL" required="true"/>
 <UserPref name="_inventory_url" display_name="Inventory spreadsheet URL" required="true"/>
 <UserPref name="_inventory_refresh_interval" display_name="inventory refresh interval (minutes)" default_value="0" datatype="enum" required="false">
 <EnumValue value="0" display_value="Do not refresh"/>
