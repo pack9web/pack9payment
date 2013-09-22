@@ -15,14 +15,15 @@ function VerifyName(form) {
     return valid;
 }
 
-//var gadgetHelper = null;
-// _IG_RegisterOnloadHandler(loadVisualizationAPI); 
-//gadgets.util.registerOnLoadHandler(loadVisualizationAPI);
 
 
 var debugDiv = document.getElementById('debugdiv');
-debugDiv.innerHTML = "Point #1";
+var debug = [];
 
+function debug(text) {
+  debug.push(text);
+  debugDiv.innerHTML = debug.join('');
+}
 
 function loadVisualizationAPI() { 
   google.load("visualization", "1");
@@ -36,26 +37,27 @@ function sendQuery() {
   //var query = gadgetHelper.createQueryFromPrefs(prefs);
   //query.send(handleQueryResponse);
 
-  debugDiv.innerHTML = "Point #6a";
+  debug("Point #6a");
 
   var prefs = new gadgets.Prefs();
   var denurl = prefs.getString("_den_url");
   var invurl = prefs.getString("_inventory_url");
   var invrefresh = prefs.getInt("_inventory_refresh_interval");
   
-  debugDiv.innerHTML = "Point #7";
+  debug("denurl = "+denurl);
+  debug("invurl = "+invurl);
   
   var denquery = new google.visualization.Query(denurl);
   denquery.setRefreshInterval(0);
   denquery.send(fillDens);
   
-  debugDiv.innerHTML = "Point #8";
+  debug("Point #8");
     
   //var invquery = new google.visualization.Query(invurl);
   //invquery.setRefreshInterval(invrefresh);
   //invquery.send(fillInventory);
   
-  debugDiv.innerHTML = "Point #10";
+  debug("Point #10");
 }
 
 
