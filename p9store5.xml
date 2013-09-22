@@ -31,6 +31,8 @@ height="600"
 
 <p>version 5.2<p>
 
+<div id="tablediv"></div>
+
 <form name="Scout" style="margin: 0px">
 Scout's full name: <input name="name" width=100>  Den number: <input name="den" size="2" maxlength="2">
 </form>
