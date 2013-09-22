@@ -26,12 +26,11 @@ height="600"
 <UserPref name="_return_url" display_name="Post purchase URL" required="true"/>
 <Content type="html"><![CDATA[
 
+<p>version 5.2<p>
+<div id="debugdiv">start</div>
+
 <script src="https://www.google.com/jsapi" type="text/javascript"></script>
 <script src="https://pack9payment.googlecode.com/git/p9store5.js" type="text/javascript"></script>
-
-<p>version 5.2<p>
-
-<div id="debugdiv">start</div>
 
 <form name="Scout" style="margin: 0px">
 Scout's full name: <input name="name" width=100>  Den number: <input name="den" size="2" maxlength="2">
