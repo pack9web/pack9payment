@@ -32,27 +32,19 @@ function loadVisualizationAPI() {
 
 function sendQuery() {
   
-  debug("Point #6a");
-
   var prefs = new gadgets.Prefs();
   var denurl = prefs.getString("_den_url");
   var invurl = prefs.getString("_inventory_url");
   var invrefresh = prefs.getInt("_inventory_refresh_interval");
   
-  debug("denurl = "+denurl);
-  debug("invurl = "+invurl);
-  
   var denquery = new google.visualization.Query(denurl);
   denquery.setRefreshInterval(0);
   denquery.send(fillDens);
   
-  debug("Point #8");
-    
-  //var invquery = new google.visualization.Query(invurl);
-  //invquery.setRefreshInterval(invrefresh);
-  //invquery.send(fillInventory);
-  
-  debug("Point #10");
+  var invquery = new google.visualization.Query(invurl);
+  invquery.setRefreshInterval(invrefresh);
+  invquery.send(fillInventory);
+
 }
 
 
@@ -73,7 +65,7 @@ function fillDens(response) {
     var num = escapeHtml(data.getFormattedValue(row, Number));
     var rank = escapeHtml(data.getFormattedValue(row, Rank));
     
-    html.push('<option value="' + num + '">' + num + ' - ' + rank + '<\option>\n');
+    html.push('<option value="' + num + '">' + num + ' - ' + rank + '</option>\n');
   }
 
   var denSelect = document.getElementById('denselect');
