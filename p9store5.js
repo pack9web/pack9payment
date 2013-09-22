@@ -196,5 +196,4 @@ function escapeHtml(str) {
   return str;
 } 
 
-debugDiv.innerHTML = "Point #2";
 
