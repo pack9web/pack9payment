@@ -58,7 +58,7 @@ hr.sep {align: center; width: 90%; }
 
 
 <script type="text/javascript">
-	gadgets.util.registerOnLoadHandler(loadVisualizationAPI());
+	gadgets.util.registerOnLoadHandler(loadVisualizationAPI);
 </script>
 
 ]]>
