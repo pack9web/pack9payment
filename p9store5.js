@@ -22,7 +22,7 @@ var debugtxt = [];
 
 function debug(text) {
   debugtxt.push(text);
-  debugDiv.innerHTML = debugtxt.join('');
+  debugDiv.innerHTML = debugtxt.join('<br>');
 }
 
 function loadVisualizationAPI() { 
@@ -31,12 +31,7 @@ function loadVisualizationAPI() {
 }
 
 function sendQuery() {
-  // var prefs = new _IG_Prefs(); // User preferences 
-  //var prefs = new gadgets.Prefs();
-  //gadgetHelper = new google.visualization.GadgetHelper(); 
-  //var query = gadgetHelper.createQueryFromPrefs(prefs);
-  //query.send(handleQueryResponse);
-
+  
   debug("Point #6a");
 
   var prefs = new gadgets.Prefs();
