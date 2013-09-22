@@ -41,12 +41,14 @@ function sendQuery() {
   debugDiv.innerHTML = "Point #6";
 
   var prefs = new gadgets.Prefs();
-
+  debugDiv.innerHTML = "Point #7";
   var query = google.visualization.Query(prefs.getString("_inventory_url"));
+  debugDiv.innerHTML = "Point #8";
   query.setRefreshInterval(prefs.getInt("_inventory_refresh_interval"));
+  debugDiv.innerHTML = "Point #9";
   query.send(fillInventory);
   
-  debugDiv.innerHTML = "Point #7";
+  debugDiv.innerHTML = "Point #10";
 }
 
 function fillInventory(response) {
