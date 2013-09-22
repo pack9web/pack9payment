@@ -38,13 +38,18 @@ function sendQuery() {
   //var query = gadgetHelper.createQueryFromPrefs(prefs);
   //query.send(handleQueryResponse);
 
-  debugDiv.innerHTML = "Point #6";
+  debugDiv.innerHTML = "Point #6a";
 
   var prefs = new gadgets.Prefs();
+  debugDiv.innerHTML = "Point #6b";
+  var url = prefs.getString("_inventory_url");
+  debugDiv.innerHTML = "Point #6c";
+  var refresh = prefs.getInt("_inventory_refresh_interval");
+  
   debugDiv.innerHTML = "Point #7";
-  var query = google.visualization.Query(prefs.getString("_inventory_url"));
+  var query = new google.visualization.Query(url);
   debugDiv.innerHTML = "Point #8";
-  query.setRefreshInterval(prefs.getInt("_inventory_refresh_interval"));
+  query.setRefreshInterval(refresh);
   debugDiv.innerHTML = "Point #9";
   query.send(fillInventory);
   
