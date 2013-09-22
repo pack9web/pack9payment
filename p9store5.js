@@ -51,9 +51,9 @@ function sendQuery() {
   
   debugDiv.innerHTML = "Point #8";
     
-  var invquery = new google.visualization.Query(invurl);
-  invquery.setRefreshInterval(invrefresh);
-  invquery.send(fillInventory);
+  //var invquery = new google.visualization.Query(invurl);
+  //invquery.setRefreshInterval(invrefresh);
+  //invquery.send(fillInventory);
   
   debugDiv.innerHTML = "Point #10";
 }
