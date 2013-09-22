@@ -76,7 +76,7 @@ function fillDens(response) {
     var num = escapeHtml(data.getFormattedValue(row, Number));
     var rank = escapeHtml(data.getFormattedValue(row, Rank));
     
-    html.push('<option value="'+num'+">'+num+' - '+rank+'<\option>\n');
+    html.push('<option value="' + num + '">' + num + ' - ' + rank + '<\option>\n');
   }
 
   var denSelect = document.getElementById('denselect');
