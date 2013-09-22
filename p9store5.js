@@ -25,10 +25,8 @@ debugDiv.innerHTML = "Point #1";
 
 
 function loadVisualizationAPI() { 
-  debugDiv.innerHTML = "Point #4";
   google.load("visualization", "1");
   google.setOnLoadCallback(sendQuery);
-  debugDiv.innerHTML = "Point #5";
 }
 
 function sendQuery() {
@@ -41,29 +39,53 @@ function sendQuery() {
   debugDiv.innerHTML = "Point #6a";
 
   var prefs = new gadgets.Prefs();
-  debugDiv.innerHTML = "Point #6b";
-  var url = prefs.getString("_inventory_url");
-  debugDiv.innerHTML = "Point #6c";
-  var refresh = prefs.getInt("_inventory_refresh_interval");
+  var denurl = prefs.getString("_den_url");
+  var invurl = prefs.getString("_inventory_url");
+  var invrefresh = prefs.getInt("_inventory_refresh_interval");
   
   debugDiv.innerHTML = "Point #7";
-  var query = new google.visualization.Query(url);
+  
+  var denquery = new google.visualization.Query(denurl);
+  denquery.setRefreshInterval(0);
+  denquery.send(fillDens);
+  
   debugDiv.innerHTML = "Point #8";
-  query.setRefreshInterval(refresh);
-  debugDiv.innerHTML = "Point #9";
-  query.send(fillInventory);
+    
+  var invquery = new google.visualization.Query(invurl);
+  invquery.setRefreshInterval(invrefresh);
+  invquery.send(fillInventory);
   
   debugDiv.innerHTML = "Point #10";
 }
 
-function fillInventory(response) {
 
-  /**
-   * Use the visualization GadgetHelper class to handle errors 
-   */
-  //if (!gadgetHelper.validateResponse(response)) {
-  //  return;     // Default error handling was done, just leave. 
-  //}
+function fillDens(response) {
+
+  if (response.isError()) {
+    alert('Error in query');
+  }
+
+  var data = response.getDataTable();
+
+  var html = [];   // start the HTML output string
+
+  const Number = 0;
+  const Rank   = 1;
+ 
+  for (var row = 0; row < data.getNumberOfRows(); row++) {
+    var num = escapeHtml(data.getFormattedValue(row, Number));
+    var rank = escapeHtml(data.getFormattedValue(row, Rank));
+    
+    html.push('<option value="'+num'+">'+num+' - '+rank+'<\option>\n');
+  }
+
+  var denDiv = document.getElementById('dendiv');
+  denDiv.innerHTML = html.join('');
+
+}
+
+
+function fillInventory(response) {
 
   if (response.isError()) {
     alert('Error in query');
