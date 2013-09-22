@@ -163,7 +163,7 @@ function escapeHtml(str) {
   if (str == null) {
     return '';
   }
-  str = str.replace(//g, ">");
+  //str = str.replace(//g, ">");
   //str = str.replace(/"/g, "\"").replace(/'/g, "'");
   return str;
 } 
