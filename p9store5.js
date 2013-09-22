@@ -164,6 +164,6 @@ function escapeHtml(str) {
     return '';
   }
   str = str.replace(//g, ">");
-  str = str.replace(/"/g, """).replace(/'/g, "'");
+  str = str.replace(/"/g, "\"").replace(/'/g, "'");
   return str;
 } 
