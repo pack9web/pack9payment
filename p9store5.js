@@ -18,7 +18,7 @@ function VerifyName(form) {
                                         "currency_code":"USD"
                                         "quantity": "1",
                                         "on0": document.Scout.name.value + 
-                                               ", Den " + document.Scout.den.value;
+                                               ", Den " + document.Scout.den.value
                                        });
         valid = false;
     }
