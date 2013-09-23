@@ -186,6 +186,13 @@ function fillInventory(response) {
   /*tableDiv.style.height = document.body.clientHeight + 'px';*/
 
   gadgets.window.adjustHeight();
+  
+  
+  // Bind the forms to the minicart.
+  for (var row = 0; row < data.getNumberOfRows(); row++) {
+    var form = document.getElementByName('form'+row);
+    PAYPAL.apps.MiniCart.bindForm(form);
+  }
 }
 
 function escapeHtml(str) {
