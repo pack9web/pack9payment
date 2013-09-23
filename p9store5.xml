@@ -27,7 +27,7 @@ height="600"
 <UserPref name="_return_url" display_name="Post purchase URL" required="true"/>
 <Content type="html"><![CDATA[
 
-
+<div id="wrapper">
 <div id="debugdiv"></div><p>&nbsp<p>
 
 <script src="https://www.google.com/jsapi" type="text/javascript"></script>
@@ -64,6 +64,7 @@ hr.sep {align: center; width: 90%; }
 	gadgets.util.registerOnLoadHandler(loadVisualizationAPI);
   PAYPAL.apps.MiniCart.render();
 </script>
+</div>
 
 ]]>
 </Content>
