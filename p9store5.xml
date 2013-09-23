@@ -62,7 +62,8 @@ hr.sep {align: center; width: 90%; }
 
 <script type="text/javascript">
 	gadgets.util.registerOnLoadHandler(loadVisualizationAPI);
-  PAYPAL.apps.MiniCart.render();
+  var wrapper = document.getElementById('wrapper');
+  PAYPAL.apps.MiniCart.render({parent: wrapper});
 </script>
 </div>
 
