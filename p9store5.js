@@ -68,13 +68,18 @@ function fillDens(response) {
   }
 
   var data = response.getDataTable();
-
+  var denSelect = document.getElementById('denselect');
   var html = [];   // start the HTML output string
 
   const Number = 0;
   const Rank   = 1;
  
-  html.push('<option value="">choose...</option>\n');
+  //html.push('<option value="">choose...</option>\n');
+  var opt = document.createElement('option');
+  opt.value = "";
+  opt.innerHTML = "choose...";
+  denSelect.appendChild(opt);
+  
   for (var row = 0; row < data.getNumberOfRows(); row++) {
     var num = escapeHtml(data.getFormattedValue(row, Number));
     var rank = escapeHtml(data.getFormattedValue(row, Rank));
@@ -82,8 +87,8 @@ function fillDens(response) {
     html.push('<option value="' + num + '">' + num + ' - ' + rank + '</option>\n');
   }
 
-  var denSelect = document.getElementById('denselect');
-  denSelect.innerHTML = html.join('');
+  
+  //  denSelect.innerHTML = html.join('');
 
 }
 
