@@ -110,6 +110,7 @@ function fillInventory(response) {
       var options = escapeHtml(data.getFormattedValue(row, Options));
 
       html.push('<form name="form' + row + '" target="paypal" ' +
+                'id="item' + row + '" ' +
                 'action="https://www.paypal.com/cgi-bin/webscr" ' +
                 'method="post" onsubmit="return VerifyName(this)" ' +
                 'style="margin: 0px">\n');
@@ -190,7 +191,7 @@ function fillInventory(response) {
   
   // Bind the forms to the minicart.
   for (var row = 0; row < data.getNumberOfRows(); row++) {
-    var form = document.getElementByName('form'+row);
+    var form = document.getElementById('item'+row);
     PAYPAL.apps.MiniCart.bindForm(form);
   }
 }
