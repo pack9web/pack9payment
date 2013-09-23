@@ -218,5 +218,5 @@ function escapeHtml(str) {
   return str;
 } 
 
-debug("version 5.5");
+debug("version 5.6");
 
