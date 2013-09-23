@@ -9,8 +9,8 @@ function VerifyName(form) {
        alert("You must enter your Scout's full name and den number for " +
              "payments to be processed correctly.");
     } else {
-        form.os0.value = document.Scout.name.value + ", Den " + 
-                         document.Scout.den.value;
+//        form.os0.value = document.Scout.name.value + ", Den " + 
+//                         document.Scout.den.value;
                          
         PAYPAL.apps.MiniCart.addToCart({"business":      form.business.value,
                                         "item_name":     form.item_name.value,
