@@ -15,9 +15,15 @@ function VerifyName(form) {
     return valid;
 }
 
-var gadgetHelper = null;
-// _IG_RegisterOnloadHandler(loadVisualizationAPI); 
-gadgets.util.registerOnLoadHandler(loadVisualizationAPI);
+
+
+var debugDiv = document.getElementById('debugdiv');
+var debugtxt = [];
+
+function debug(text) {
+  debugtxt.push(text);
+  debugDiv.innerHTML = debugtxt.join('<br>');
+}
 
 function loadVisualizationAPI() { 
   google.load("visualization", "1");
@@ -25,28 +31,51 @@ function loadVisualizationAPI() {
 }
 
 function sendQuery() {
-  // var prefs = new _IG_Prefs(); // User preferences 
-  //var prefs = new gadgets.Prefs();
-  //gadgetHelper = new google.visualization.GadgetHelper(); 
-  //var query = gadgetHelper.createQueryFromPrefs(prefs);
-  //query.send(handleQueryResponse);
-
+  
   var prefs = new gadgets.Prefs();
-
-  var query = google.visualization.Query(prefs.getString("_inventory_url"));
-  query.setRefreshInterval(prefs.getInt("_inventory_refresh_interval"));
-  query.send(fillInventory);
+  var denurl = prefs.getString("_den_url");
+  var invurl = prefs.getString("_inventory_url");
+  var invrefresh = prefs.getInt("_inventory_refresh_interval");
+  
+  var denquery = new google.visualization.Query(denurl);
+  denquery.setRefreshInterval(0);
+  denquery.send(fillDens);
+  
+  var invquery = new google.visualization.Query(invurl);
+  invquery.setRefreshInterval(invrefresh);
+  invquery.send(fillInventory);
 
 }
 
-function fillInventory(response) {
 
-  /**
-   * Use the visualization GadgetHelper class to handle errors 
-   */
-  //if (!gadgetHelper.validateResponse(response)) {
-  //  return;     // Default error handling was done, just leave. 
-  //}
+function fillDens(response) {
+
+  if (response.isError()) {
+    alert('Error in query');
+  }
+
+  var data = response.getDataTable();
+
+  var html = [];   // start the HTML output string
+
+  const Number = 0;
+  const Rank   = 1;
+ 
+  html.push('<option value="">choose...</option>\n');
+  for (var row = 0; row < data.getNumberOfRows(); row++) {
+    var num = escapeHtml(data.getFormattedValue(row, Number));
+    var rank = escapeHtml(data.getFormattedValue(row, Rank));
+    
+    html.push('<option value="' + num + '">' + num + ' - ' + rank + '</option>\n');
+  }
+
+  var denSelect = document.getElementById('denselect');
+  denSelect.innerHTML = html.join('');
+
+}
+
+
+function fillInventory(response) {
 
   if (response.isError()) {
     alert('Error in query');
@@ -163,7 +192,9 @@ function escapeHtml(str) {
   if (str == null) {
     return '';
   }
-  str = str.replace(//g, ">");
-  str = str.replace(/"/g, """).replace(/'/g, "'");
+  //str = str.replace(//g, ">");
+  //str = str.replace(/"/g, "\"").replace(/'/g, "'");
   return str;
 } 
+
+
