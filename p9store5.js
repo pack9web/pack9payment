@@ -74,7 +74,7 @@ function fillDens(response) {
   const Number = 0;
   const Rank   = 1;
  
-  //html.push('<option value="">choose...</option>\n');
+//  html.push('<option value="">choose...</option>\n');
   var opt = document.createElement('option');
   opt.value = "";
   opt.innerHTML = "choose...";
@@ -84,7 +84,11 @@ function fillDens(response) {
     var num = escapeHtml(data.getFormattedValue(row, Number));
     var rank = escapeHtml(data.getFormattedValue(row, Rank));
     
-    html.push('<option value="' + num + '">' + num + ' - ' + rank + '</option>\n');
+//    html.push('<option value="' + num + '">' + num + ' - ' + rank + '</option>\n');
+    opt.value = num;
+    opt.innerHTML = num + ' - ' + rank;
+    denSelect.appendChild(opt);
+
   }
 
   
