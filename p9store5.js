@@ -12,13 +12,16 @@ function VerifyName(form) {
         form.os0.value = document.Scout.name.value + ", Den " + 
                          document.Scout.den.value;
                          
-        PAYPAL.apps.MiniCart.addToCart({"business": Business,
-                                        "item_name":"test",
-                                        "amount":"5.00",
-                                        "currency_code":"USD",
-                                        "quantity": "1",
-                                        "on0": document.Scout.name.value + 
-                                               ", Den " + document.Scout.den.value
+        PAYPAL.apps.MiniCart.addToCart({"business":      form.business.value,
+                                        "item_name":     form.item_name.value,
+                                        "amount":        form.amount.value,
+                                        "currency_code": form.currency_code.value,
+                                        "quantity":      form.quantity.value,
+                                        "on0":           form.on0.value,
+                                        "os0": document.Scout.name.value + 
+                                               ", Den " + document.Scout.den.value,
+                                        "on1":           form.on1.value,
+                                        "os1":           form.os1.value,
                                        });
         valid = false;
     }
@@ -121,7 +124,6 @@ function fillInventory(response) {
 
       html.push('<form name="form' + row + '" target="paypal" ' +
                 'id="item' + row + '" ' +
-                'action="https://www.paypal.com/cgi-bin/webscr" ' +
                 'method="post" onsubmit="return VerifyName(this)" ' +
                 'style="margin: 0px">\n');
       html.push('<input type="hidden" name="cmd" value="_cart">\n');
@@ -200,10 +202,10 @@ function fillInventory(response) {
   
   
   // Bind the forms to the minicart.
-  for (var row = 0; row < data.getNumberOfRows(); row++) {
-    var form = document.getElementById('item'+row);
-    PAYPAL.apps.MiniCart.bindForm(form);
-  }
+//  for (var row = 0; row < data.getNumberOfRows(); row++) {
+//    var form = document.getElementById('item'+row);
+//    PAYPAL.apps.MiniCart.bindForm(form);
+//  }
 }
 
 function escapeHtml(str) {
