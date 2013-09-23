@@ -32,6 +32,7 @@ height="600"
 
 <script src="https://www.google.com/jsapi" type="text/javascript"></script>
 <script src="https://pack9payment.googlecode.com/git/p9store5.js" type="text/javascript"></script>
+<script src="https://pack9payment.googlecode.com/git/minicart.min.js" type="text/javascript"></script>
 
 <form name="Scout" style="margin: 0px">
 Scout's full name: <input name="name" width=100>  Den number: <select id="denselect" name="den"></select>
@@ -61,6 +62,7 @@ hr.sep {align: center; width: 90%; }
 
 <script type="text/javascript">
 	gadgets.util.registerOnLoadHandler(loadVisualizationAPI);
+  PAYPAL.apps.MiniCart.render();
 </script>
 
 ]]>
