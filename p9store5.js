@@ -15,7 +15,7 @@ function VerifyName(form) {
         PAYPAL.apps.MiniCart.addToCart({"business": Business,
                                         "item_name":"test",
                                         "amount":"5.00",
-                                        "currency_code":"USD"
+                                        "currency_code":"USD",
                                         "quantity": "1",
                                         "on0": document.Scout.name.value + 
                                                ", Den " + document.Scout.den.value
