@@ -38,6 +38,8 @@ function debug(text) {
   debugDiv.innerHTML = debugtxt.join('<br>');
 }
 
+debug("version 5.7");
+
 function loadVisualizationAPI() { 
   google.load("visualization", "1");
   google.setOnLoadCallback(sendQuery);
@@ -228,5 +230,5 @@ function escapeHtml(str) {
   return str;
 } 
 
-debug("version 5.7");
+
 
