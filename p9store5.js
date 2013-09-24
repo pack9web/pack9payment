@@ -40,7 +40,7 @@ function debug(text) {
   debugDiv.innerHTML = debugtxt.join('<br>');
 }
 
-debug("version 5.8");
+debug("version 5.9");
 
 function loadVisualizationAPI() { 
   google.load("visualization", "1");
@@ -190,7 +190,7 @@ function fillInventory(response) {
 
       html.push('<div class="cell15">$' + price + '</div>\n');
       //html.push('<div class="cell16"><input src="https://www.paypal.com/en_US/i/btn/btn_cart_SM.gif" alt="Add to cart" name="submit" border="0" type="image"></div>\n');
-      html.push('<div class="cell16"><input type="button" name="Add to cart"  border="0" onclick="return VerifyName(\'item' + row + '\')"></div>\n');
+      html.push('<div class="cell16"><input type="button" name="Add to cart"  border="0" onclick="return VerifyName(\'item' + row + '\')">Add to cart</input></div>\n');
       html.push('<div class="tr-end"></div>\n');
       html.push('</div>');
       html.push('<div class="table-row">\n');
@@ -205,23 +205,13 @@ function fillInventory(response) {
   } 
 
 
-  /**
-   * Set the generated html into the container div.
-   */
-  // var tableDiv = _gel('tablediv');
+  // Set the generated html into the container div.
+
   var tableDiv = document.getElementById('tablediv');
   tableDiv.innerHTML = html.join('');
-  /*tableDiv.style.width = document.body.clientWidth + 'px'; */
-  /*tableDiv.style.height = document.body.clientHeight + 'px';*/
 
   gadgets.window.adjustHeight();
   
-  
-  // Bind the forms to the minicart.
-//  for (var row = 0; row < data.getNumberOfRows(); row++) {
-//    var form = document.getElementById('item'+row);
-//    PAYPAL.apps.MiniCart.bindForm(form);
-//  }
 }
 
 function escapeHtml(str) {
