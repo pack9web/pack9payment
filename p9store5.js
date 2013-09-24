@@ -40,7 +40,7 @@ function debug(text) {
   debugDiv.innerHTML = debugtxt.join('<br>');
 }
 
-debug("version 5.7");
+debug("version 5.8");
 
 function loadVisualizationAPI() { 
   google.load("visualization", "1");
