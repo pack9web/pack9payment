@@ -190,7 +190,7 @@ function fillInventory(response) {
 
       html.push('<div class="cell15">$' + price + '</div>\n');
       //html.push('<div class="cell16"><input src="https://www.paypal.com/en_US/i/btn/btn_cart_SM.gif" alt="Add to cart" name="submit" border="0" type="image"></div>\n');
-      html.push('<div class="cell16"><input type="button" name="Add to cart"  border="0" onclick="return VerifyName(\'item' + row + '\')">Add to cart</input></div>\n');
+      html.push('<div class="cell16"><input type="button" src="https://www.paypal.com/en_US/i/btn/btn_cart_SM.gif" alt="Add to cart" name="Add to cart"  border="0" onclick="return VerifyName(\'item' + row + '\')"></div>\n');
       html.push('<div class="tr-end"></div>\n');
       html.push('</div>');
       html.push('<div class="table-row">\n');
