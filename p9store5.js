@@ -85,8 +85,9 @@ function fillDens(response) {
     var rank = escapeHtml(data.getFormattedValue(row, Rank));
     
 //    html.push('<option value="' + num + '">' + num + ' - ' + rank + '</option>\n');
+    opt = document.createElement('option');
     opt.value = num;
-    opt.innerHTML = num + ' - ' + rank;
+    opt.innerHTML = num + ' - ' + rank; 
     denSelect.appendChild(opt);
 
   }
