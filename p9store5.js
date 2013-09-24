@@ -13,7 +13,7 @@ function VerifyName(item) {
     } else {
 //        form.os0.value = document.Scout.name.value + ", Den " + 
 //                         document.Scout.den.value;
-                         
+ 
         PAYPAL.apps.MiniCart.addToCart({"business":      form.business.value,
                                         "item_name":     form.item_name.value,
                                         "amount":        form.amount.value,
@@ -156,10 +156,10 @@ function fillInventory(response) {
       html.push('<input type="hidden" name="on0" value="For">\n');
       html.push('<input type="hidden" name="os0">\n');
 
-      if (optName != '') {
+//      if (optName != '') {
           html.push('<input type="hidden" name="on1" value="' + optName +
                     '">\n');
-      }
+//      }
 
       html.push('<div class="table-row">\n');
       html.push('<div class="cell11">' + title + '</div>\n');
@@ -174,7 +174,8 @@ function fillInventory(response) {
           }
           html.push('</select>');
       } else {
-          html.push('&nbsp;');
+//          html.push('&nbsp;');
+          html.push('<input type="hidden" name="os1" value="">\n');
       }
       html.push('</div>\n');
 
